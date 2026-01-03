@@ -1,5 +1,5 @@
 # Odoo-Hackathon-2026
-# 🌍 GlobalTrotters – Travel Planning Frontend
+# 🌍 GlobalTrotters – Travel Planning Web Application
 
 GlobalTrotters Frontend is a **responsive, modular travel planning web interface** designed to help users plan multi-city trips, manage itineraries, track budgets, and visualize travel schedules.  
 This frontend works seamlessly with a **FastAPI + MySQL backend** and follows a clean HTML–CSS–JavaScript architecture.
