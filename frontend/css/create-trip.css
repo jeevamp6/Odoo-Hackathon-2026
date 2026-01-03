@@ -1,0 +1,398 @@
+/* ===================================
+   CREATE TRIP PAGE STYLES
+   =================================== */
+
+.create-trip-page {
+    min-height: 100vh;
+    background: var(--bg-secondary);
+    padding-bottom: var(--space-12);
+}
+
+.create-trip-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: var(--space-8);
+}
+
+.create-trip-header {
+    text-align: center;
+    margin-bottom: var(--space-10);
+}
+
+.create-trip-title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-extrabold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+}
+
+.create-trip-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+}
+
+/* ===================================
+   FORM SECTIONS
+   =================================== */
+
+.form-section {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    margin-bottom: var(--space-6);
+    box-shadow: var(--shadow-sm);
+}
+
+.form-section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-6);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.form-help-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-tertiary);
+    margin-top: var(--space-2);
+}
+
+/* ===================================
+   COVER PHOTO UPLOAD
+   =================================== */
+
+.cover-photo-upload {
+    margin-bottom: var(--space-4);
+}
+
+.cover-photo-preview {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: var(--color-gray-100);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.cover-photo-preview:hover {
+    transform: scale(1.01);
+    box-shadow: var(--shadow-lg);
+}
+
+.cover-photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cover-photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.cover-photo-preview:hover .cover-photo-overlay {
+    opacity: 1;
+}
+
+/* ===================================
+   FORM ROWS
+   =================================== */
+
+.form-row {
+    margin-bottom: var(--space-5);
+}
+
+.form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+.form-row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-4);
+}
+
+/* ===================================
+   ATTRACTIONS SECTION
+   =================================== */
+
+.attractions-header {
+    margin-bottom: var(--space-6);
+}
+
+.attractions-subtitle {
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+    margin-top: var(--space-2);
+}
+
+.attractions-subtitle span {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-600);
+}
+
+.attractions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.attraction-card {
+    background: var(--color-gray-50);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    transition: all var(--transition-base);
+    cursor: pointer;
+    position: relative;
+}
+
+.attraction-card:hover {
+    border-color: var(--color-primary-500);
+    background: var(--color-primary-50);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.attraction-card.selected {
+    border-color: var(--color-primary-600);
+    background: var(--color-primary-100);
+    box-shadow: var(--shadow-md);
+}
+
+.attraction-card-header {
+    display: flex;
+    align-items: start;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+}
+
+.attraction-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-2xl);
+    flex-shrink: 0;
+}
+
+.attraction-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.attraction-name {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.attraction-location {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.attraction-description {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-3);
+}
+
+.attraction-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+
+.attraction-meta-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.attraction-checkbox {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    width: 24px;
+    height: 24px;
+    accent-color: var(--color-primary-500);
+    cursor: pointer;
+}
+
+.attractions-empty {
+    text-align: center;
+    padding: var(--space-12) var(--space-4);
+    color: var(--text-tertiary);
+}
+
+/* ===================================
+   FORM ACTIONS
+   =================================== */
+
+.form-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: flex-end;
+    padding: var(--space-6) 0;
+}
+
+/* ===================================
+   ROUTE INFO BANNER
+   =================================== */
+
+.route-info-banner {
+    background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-700) 100%);
+    color: var(--text-inverse);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    margin-bottom: var(--space-6);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.route-info-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-3xl);
+    flex-shrink: 0;
+}
+
+.route-info-content {
+    flex: 1;
+}
+
+.route-info-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-1);
+}
+
+.route-info-details {
+    font-size: var(--font-size-sm);
+    opacity: 0.9;
+}
+
+/* ===================================
+   LOADING STATE
+   =================================== */
+
+.attractions-loading {
+    text-align: center;
+    padding: var(--space-12);
+}
+
+.attractions-loading .spinner {
+    margin: 0 auto var(--space-4);
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+@media (max-width: 768px) {
+    .create-trip-title {
+        font-size: var(--font-size-3xl);
+    }
+
+    .form-section {
+        padding: var(--space-6);
+    }
+
+    .form-row-2,
+    .form-row-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .cover-photo-preview {
+        height: 200px;
+    }
+
+    .attractions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+}
+
+/* ===================================
+   ANIMATIONS
+   =================================== */
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.attraction-card {
+    animation: slideInUp var(--transition-base) ease-out;
+}
+
+.attraction-card:nth-child(1) {
+    animation-delay: 0ms;
+}
+
+.attraction-card:nth-child(2) {
+    animation-delay: 50ms;
+}
+
+.attraction-card:nth-child(3) {
+    animation-delay: 100ms;
+}
+
+.attraction-card:nth-child(4) {
+    animation-delay: 150ms;
+}
+
+.attraction-card:nth-child(5) {
+    animation-delay: 200ms;
+}
+
+.attraction-card:nth-child(6) {
+    animation-delay: 250ms;
+}

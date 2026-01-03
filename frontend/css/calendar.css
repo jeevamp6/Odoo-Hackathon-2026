@@ -1,0 +1,490 @@
+/* ===================================
+   TRIP CALENDAR STYLES
+   =================================== */
+
+.calendar-page {
+    min-height: 100vh;
+    background: var(--bg-secondary);
+    padding-bottom: var(--space-12);
+}
+
+/* Page Header */
+.page-header {
+    background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-700) 100%);
+    color: var(--text-inverse);
+    padding: var(--space-10) 0;
+    margin-bottom: var(--space-8);
+}
+
+.page-title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-extrabold);
+    color: var(--text-inverse);
+    margin-bottom: var(--space-2);
+}
+
+.page-subtitle {
+    font-size: var(--font-size-lg);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Calendar Controls */
+.calendar-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    background: var(--color-white);
+    padding: var(--space-5);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.calendar-current-month {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    min-width: 200px;
+    text-align: center;
+}
+
+.view-toggle {
+    display: flex;
+    gap: var(--space-2);
+    background: var(--color-gray-100);
+    padding: var(--space-2);
+    border-radius: var(--radius-lg);
+}
+
+.view-toggle-btn {
+    padding: var(--space-2) var(--space-4);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.view-toggle-btn:hover {
+    background: var(--color-white);
+    color: var(--text-primary);
+}
+
+.view-toggle-btn.active {
+    background: var(--color-primary-500);
+    color: var(--text-inverse);
+}
+
+/* Calendar View */
+.calendar-view {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-md);
+}
+
+.calendar-grid {
+    margin-bottom: var(--space-6);
+}
+
+.calendar-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.calendar-day-name {
+    text-align: center;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    padding: var(--space-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--space-2);
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.calendar-day.today {
+    border-color: var(--color-primary-500);
+    background: var(--color-primary-50);
+}
+
+.calendar-day.has-trips {
+    background: linear-gradient(to bottom, var(--color-white) 70%, var(--color-primary-100) 100%);
+}
+
+.calendar-day-number {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.calendar-day-trips {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+}
+
+.calendar-trip-dot {
+    width: 100%;
+    height: 4px;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
+}
+
+.calendar-trip-dot.upcoming {
+    background: var(--color-primary-500);
+}
+
+.calendar-trip-dot.ongoing {
+    background: #f59e0b;
+}
+
+.calendar-trip-dot.past {
+    background: var(--color-gray-400);
+}
+
+.calendar-day-count {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    text-align: center;
+    margin-top: auto;
+}
+
+/* Legend */
+.calendar-legend {
+    background: var(--color-gray-50);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+}
+
+.legend-title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+}
+
+.legend-items {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: var(--radius-full);
+}
+
+.legend-dot.upcoming {
+    background: var(--color-primary-500);
+}
+
+.legend-dot.ongoing {
+    background: #f59e0b;
+}
+
+.legend-dot.past {
+    background: var(--color-gray-400);
+}
+
+/* Timeline View */
+.timeline-view {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-md);
+    min-height: 600px;
+}
+
+.timeline-container {
+    position: relative;
+    padding: var(--space-6) 0;
+}
+
+.timeline-month-group {
+    margin-bottom: var(--space-10);
+}
+
+.timeline-month-header {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-3);
+    border-bottom: 3px solid var(--color-primary-500);
+}
+
+.timeline-trip {
+    position: relative;
+    margin-bottom: var(--space-6);
+    padding-left: var(--space-16);
+}
+
+.timeline-trip::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: -24px;
+    width: 3px;
+    background: var(--color-gray-200);
+}
+
+.timeline-trip:last-child::before {
+    display: none;
+}
+
+.timeline-trip-marker {
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-full);
+    border: 3px solid var(--color-white);
+    box-shadow: var(--shadow-sm);
+}
+
+.timeline-trip-marker.upcoming {
+    background: var(--color-primary-500);
+}
+
+.timeline-trip-marker.ongoing {
+    background: #f59e0b;
+    animation: pulse 2s infinite;
+}
+
+.timeline-trip-marker.past {
+    background: var(--color-gray-400);
+}
+
+.timeline-trip-card {
+    background: var(--color-white);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    transition: all var(--transition-base);
+    cursor: pointer;
+}
+
+.timeline-trip-card:hover {
+    border-color: var(--color-primary-500);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+}
+
+.timeline-trip-header {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    margin-bottom: var(--space-3);
+}
+
+.timeline-trip-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+}
+
+.timeline-trip-dates {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.timeline-trip-badge {
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+.timeline-trip-badge.upcoming {
+    background: var(--color-primary-100);
+    color: var(--color-primary-700);
+}
+
+.timeline-trip-badge.ongoing {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.timeline-trip-badge.past {
+    background: var(--color-gray-100);
+    color: var(--color-gray-700);
+}
+
+.timeline-trip-meta {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.timeline-trip-meta-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.timeline-trip-progress {
+    margin-top: var(--space-4);
+}
+
+.timeline-trip-progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-2);
+}
+
+.timeline-trip-progress-bar {
+    height: 6px;
+    background: var(--color-gray-200);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.timeline-trip-progress-fill {
+    height: 100%;
+    background: var(--color-primary-500);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-base);
+}
+
+/* Day Details Modal */
+.modal-large {
+    max-width: 700px;
+}
+
+.day-trip-item {
+    background: var(--color-gray-50);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    margin-bottom: var(--space-3);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.day-trip-item:hover {
+    background: var(--color-primary-50);
+    transform: translateX(4px);
+}
+
+.day-trip-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+}
+
+.day-trip-info {
+    display: flex;
+    gap: var(--space-4);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .calendar-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .calendar-nav {
+        justify-content: space-between;
+    }
+
+    .view-toggle {
+        width: 100%;
+    }
+
+    .view-toggle-btn {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .calendar-day {
+        aspect-ratio: 0.8;
+        padding: var(--space-1);
+    }
+
+    .calendar-day-number {
+        font-size: var(--font-size-xs);
+    }
+
+    .timeline-trip {
+        padding-left: var(--space-10);
+    }
+
+    .timeline-trip::before {
+        left: 12px;
+    }
+
+    .timeline-trip-marker {
+        left: 6px;
+        width: 16px;
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.calendar-day {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.timeline-trip {
+    animation: fadeIn 0.4s ease-out;
+}

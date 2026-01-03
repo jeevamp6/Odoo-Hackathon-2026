@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create a new trip with route suggestions and attractions">
+    <title>Create New Trip - Travel Planner</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/create-trip.css">
+</head>
+
+<body>
+    <div class="create-trip-page">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="container navbar-container">
+                <a href="dashboard.html" class="navbar-brand">
+                    <img src="assets/images/logo.png" alt="Travel Planner" class="navbar-logo">
+                    <span class="navbar-title">Travel Planner</span>
+                </a>
+
+                <div class="navbar-menu">
+                    <a href="dashboard.html" class="navbar-link">
+                        <span>←</span>
+                        <span>Back to Dashboard</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container create-trip-container">
+            <div class="create-trip-header">
+                <h1 class="create-trip-title">Create Your Dream Trip</h1>
+                <p class="create-trip-subtitle">Plan your journey and discover amazing places along the way</p>
+            </div>
+
+            <form id="createTripForm" class="create-trip-form">
+                <!-- Cover Photo Section -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Trip Cover Photo</h2>
+                    <div class="cover-photo-upload">
+                        <div class="cover-photo-preview" id="coverPhotoPreview">
+                            <img src="assets/images/default-trip-cover.jpg" alt="Trip cover" id="coverPhotoImg">
+                            <div class="cover-photo-overlay">
+                                <button type="button" class="btn btn-secondary" id="uploadCoverBtn">
+                                    <span>📷</span>
+                                    Upload Photo
+                                </button>
+                            </div>
+                        </div>
+                        <input type="file" id="coverPhotoInput" accept="image/*" style="display: none;">
+                        <p class="form-help-text">Upload a cover photo for your trip (optional)</p>
+                    </div>
+                </div>
+
+                <!-- Basic Trip Information -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Trip Details</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tripName" class="form-label">Trip Name *</label>
+                            <input type="text" id="tripName" class="form-input"
+                                placeholder="e.g., Kashmir Adventure 2026" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tripDescription" class="form-label">Description</label>
+                            <textarea id="tripDescription" class="form-textarea"
+                                placeholder="Describe your trip, what you want to experience..." rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row form-row-2">
+                        <div class="form-group">
+                            <label for="startDate" class="form-label">Start Date *</label>
+                            <input type="date" id="startDate" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="endDate" class="form-label">End Date *</label>
+                            <input type="date" id="endDate" class="form-input" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="budget" class="form-label">Budget (USD) *</label>
+                            <input type="number" id="budget" class="form-input" placeholder="5000" min="0" step="100"
+                                required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Journey Details -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Journey Details</h2>
+
+                    <div class="form-row form-row-2">
+                        <div class="form-group">
+                            <label for="origin" class="form-label">Starting From *</label>
+                            <input type="text" id="origin" class="form-input" placeholder="e.g., Bangalore" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="destination" class="form-label">Going To *</label>
+                            <input type="text" id="destination" class="form-input" placeholder="e.g., Kashmir" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="travelMode" class="form-label">Travel Mode *</label>
+                            <select id="travelMode" class="form-select" required>
+                                <option value="">Select travel mode</option>
+                                <option value="bike">🏍️ Bike / Motorcycle</option>
+                                <option value="car">🚗 Car</option>
+                                <option value="train">🚂 Train</option>
+                                <option value="flight">✈️ Flight</option>
+                                <option value="bus">🚌 Bus</option>
+                                <option value="mixed">🔀 Mixed (Multiple modes)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" id="findAttractionsBtn">
+                        <span>🔍</span>
+                        Find Attractions Along Route
+                    </button>
+                </div>
+
+                <!-- Suggested Attractions Section -->
+                <div class="form-section" id="attractionsSection" style="display: none;">
+                    <div class="attractions-header">
+                        <h2 class="form-section-title">
+                            <span>✨</span>
+                            Bonus Places to Visit Along Your Journey
+                        </h2>
+                        <p class="attractions-subtitle">
+                            We found <span id="attractionsCount">0</span> amazing places you can explore on your way!
+                        </p>
+                    </div>
+
+                    <div class="attractions-grid" id="attractionsGrid">
+                        <!-- Attractions will be inserted here -->
+                    </div>
+
+                    <div class="attractions-empty" id="attractionsEmpty" style="display: none;">
+                        <div class="empty-state-icon">🗺️</div>
+                        <p>Enter your origin and destination to discover attractions along your route</p>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-ghost btn-lg" onclick="window.location.href='dashboard.html'">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <span>✈️</span>
+                        Create Trip & Book Accommodations
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/create-trip.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My Trips - View and manage all your travel plans">
+    <title>My Trips - Travel Planner</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/my-trips.css">
+</head>
+
+<body>
+    <div class="my-trips-page">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="container navbar-container">
+                <a href="dashboard.html" class="navbar-brand">
+                    <img src="assets/images/logo.png" alt="Travel Planner" class="navbar-logo">
+                    <span class="navbar-title">Travel Planner</span>
+                </a>
+
+                <div class="navbar-menu">
+                    <a href="dashboard.html" class="navbar-link">
+                        <span>🏠</span>
+                        <span>Home</span>
+                    </a>
+                    <a href="my-trips.html" class="navbar-link" style="color: var(--color-primary-600);">
+                        <span>✈️</span>
+                        <span>My Trips</span>
+                    </a>
+                    <div class="dropdown">
+                        <div class="navbar-user" id="userMenuToggle">
+                            <div class="avatar" id="userAvatar">U</div>
+                            <span class="navbar-user-name" id="userName">User</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="dropdown-menu" id="userMenu">
+                            <a href="#" class="dropdown-item" id="profileLink">
+                                <span>👤</span>
+                                <span>Profile</span>
+                            </a>
+                            <a href="#" class="dropdown-item" id="settingsLink">
+                                <span>⚙️</span>
+                                <span>Settings</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" id="logoutLink">
+                                <span>🚪</span>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="container">
+                <div class="page-header-content">
+                    <div class="page-header-text">
+                        <h1 class="page-title">My Trips</h1>
+                        <p class="page-subtitle">Manage all your travel plans in one place</p>
+                    </div>
+                    <button class="btn btn-primary btn-lg" id="newTripBtn">
+                        <span>✈️</span>
+                        Plan New Trip
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters & Search -->
+        <div class="container">
+            <div class="trips-controls">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" class="search-input"
+                        placeholder="Search trips by name or destination...">
+                </div>
+
+                <div class="filters">
+                    <select id="statusFilter" class="filter-select">
+                        <option value="all">All Trips</option>
+                        <option value="upcoming">Upcoming</option>
+                        <option value="ongoing">Ongoing</option>
+                        <option value="past">Past</option>
+                    </select>
+
+                    <select id="sortBy" class="filter-select">
+                        <option value="date-desc">Newest First</option>
+                        <option value="date-asc">Oldest First</option>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                        <option value="budget-desc">Highest Budget</option>
+                        <option value="budget-asc">Lowest Budget</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Stats Summary -->
+            <div class="trips-stats">
+                <div class="stat-item">
+                    <span class="stat-icon">📊</span>
+                    <div class="stat-content">
+                        <span class="stat-value" id="totalTripsCount">0</span>
+                        <span class="stat-label">Total Trips</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">🔜</span>
+                    <div class="stat-content">
+                        <span class="stat-value" id="upcomingCount">0</span>
+                        <span class="stat-label">Upcoming</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">✅</span>
+                    <div class="stat-content">
+                        <span class="stat-value" id="completedCount">0</span>
+                        <span class="stat-label">Completed</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">💰</span>
+                    <div class="stat-content">
+                        <span class="stat-value" id="totalBudgetSum">$0</span>
+                        <span class="stat-label">Total Budget</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trips List -->
+            <div class="trips-list" id="tripsList">
+                <!-- Trip cards will be inserted here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-state-icon">✈️</div>
+                <h3 class="empty-state-title">No trips found</h3>
+                <p class="empty-state-text" id="emptyStateText">
+                    Start planning your dream vacation! Create your first trip and add destinations, activities, and
+                    budgets.
+                </p>
+                <button class="btn btn-primary btn-lg" onclick="window.location.href='create-trip.html'">
+                    <span>✈️</span>
+                    Plan Your First Trip
+                </button>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading-state" id="loadingState" style="display: none;">
+                <div class="spinner"></div>
+                <p>Loading your trips...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Delete Trip?</h3>
+                <button class="modal-close" onclick="closeDeleteModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: var(--space-4); color: var(--text-secondary);">
+                    Are you sure you want to delete "<strong id="deleteTripName"></strong>"?
+                </p>
+                <p style="color: var(--color-error); font-size: var(--font-size-sm);">
+                    ⚠️ This action cannot be undone. All stops, activities, and expenses will be permanently deleted.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeDeleteModal()">Cancel</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn">Delete Trip</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/my-trips.js"></script>
+</body>
+
+</html>

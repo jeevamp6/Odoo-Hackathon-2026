@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trip Calendar - Visual timeline of your travel plans">
+    <title>Trip Calendar - Travel Planner</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/calendar.css">
+</head>
+
+<body>
+    <div class="calendar-page">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="container navbar-container">
+                <a href="dashboard.html" class="navbar-brand">
+                    <img src="assets/images/logo.png" alt="Travel Planner" class="navbar-logo">
+                    <span class="navbar-title">Travel Planner</span>
+                </a>
+
+                <div class="navbar-menu">
+                    <a href="dashboard.html" class="navbar-link">
+                        <span>🏠</span>
+                        <span>Home</span>
+                    </a>
+                    <a href="my-trips.html" class="navbar-link">
+                        <span>✈️</span>
+                        <span>My Trips</span>
+                    </a>
+                    <a href="trip-calendar.html" class="navbar-link active">
+                        <span>📅</span>
+                        <span>Calendar</span>
+                    </a>
+                    <div class="dropdown">
+                        <div class="navbar-user" id="userMenuToggle">
+                            <div class="avatar" id="userAvatar">U</div>
+                            <span class="navbar-user-name" id="userName">User</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="dropdown-menu" id="userMenu">
+                            <a href="#" class="dropdown-item" id="profileLink">
+                                <span>👤</span>
+                                <span>Profile</span>
+                            </a>
+                            <a href="#" class="dropdown-item" id="settingsLink">
+                                <span>⚙️</span>
+                                <span>Settings</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" id="logoutLink">
+                                <span>🚪</span>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="container">
+                <h1 class="page-title">Trip Calendar</h1>
+                <p class="page-subtitle">Visualize your travel timeline</p>
+            </div>
+        </div>
+
+        <!-- Calendar Controls -->
+        <div class="container">
+            <div class="calendar-controls">
+                <div class="calendar-nav">
+                    <button class="btn btn-ghost" id="prevMonth">
+                        <span>←</span>
+                        Previous
+                    </button>
+                    <h2 class="calendar-current-month" id="currentMonth">January 2026</h2>
+                    <button class="btn btn-ghost" id="nextMonth">
+                        Next
+                        <span>→</span>
+                    </button>
+                </div>
+
+                <div class="view-toggle">
+                    <button class="view-toggle-btn active" data-view="calendar">
+                        <span>📅</span>
+                        Calendar
+                    </button>
+                    <button class="view-toggle-btn" data-view="timeline">
+                        <span>📊</span>
+                        Timeline
+                    </button>
+                </div>
+            </div>
+
+            <!-- Calendar View -->
+            <div class="calendar-view" id="calendarView">
+                <div class="calendar-grid">
+                    <div class="calendar-header">
+                        <div class="calendar-day-name">Sun</div>
+                        <div class="calendar-day-name">Mon</div>
+                        <div class="calendar-day-name">Tue</div>
+                        <div class="calendar-day-name">Wed</div>
+                        <div class="calendar-day-name">Thu</div>
+                        <div class="calendar-day-name">Fri</div>
+                        <div class="calendar-day-name">Sat</div>
+                    </div>
+                    <div class="calendar-days" id="calendarDays">
+                        <!-- Calendar days will be generated here -->
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="calendar-legend">
+                    <h3 class="legend-title">Trip Status</h3>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <span class="legend-dot upcoming"></span>
+                            <span>Upcoming</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot ongoing"></span>
+                            <span>Ongoing</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot past"></span>
+                            <span>Past</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline View -->
+            <div class="timeline-view" id="timelineView" style="display: none;">
+                <div class="timeline-container" id="timelineContainer">
+                    <!-- Timeline will be generated here -->
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="timelineEmptyState" style="display: none;">
+                    <div class="empty-state-icon">📅</div>
+                    <h3 class="empty-state-title">No trips scheduled</h3>
+                    <p class="empty-state-text">Create your first trip to see it on the timeline</p>
+                    <button class="btn btn-primary" onclick="window.location.href='create-trip.html'">
+                        Create Trip
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Day Details Modal -->
+    <div class="modal-overlay" id="dayDetailsModal">
+        <div class="modal modal-large">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalDayTitle">Day Details</h3>
+                <button class="modal-close" onclick="closeDayDetailsModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="dayTripsContainer">
+                    <!-- Trips for selected day will be shown here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeDayDetailsModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/trip-calendar.js"></script>
+</body>
+
+</html>

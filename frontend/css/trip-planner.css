@@ -1,0 +1,368 @@
+/* ===================================
+   TRIP PLANNER STYLES
+   =================================== */
+
+.trip-planner {
+    min-height: 100vh;
+    background: var(--bg-secondary);
+    padding-bottom: var(--space-12);
+}
+
+.trip-planner-header {
+    background: var(--color-white);
+    border-bottom: 1px solid var(--border-light);
+    padding: var(--space-6) 0;
+    margin-bottom: var(--space-8);
+}
+
+.trip-planner-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.trip-planner-title-section {
+    flex: 1;
+    min-width: 300px;
+}
+
+.trip-planner-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+}
+
+.trip-planner-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    flex-wrap: wrap;
+}
+
+.trip-planner-actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+/* Main Layout */
+.trip-planner-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: var(--space-8);
+}
+
+.trip-planner-main {
+    min-width: 0;
+}
+
+.trip-planner-sidebar {
+    position: sticky;
+    top: calc(var(--space-6) + 80px);
+    height: fit-content;
+}
+
+/* Sections */
+.planner-section {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+    box-shadow: var(--shadow-sm);
+}
+
+.planner-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.planner-section-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+/* Stops List */
+.stops-list {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.stop-item {
+    background: var(--color-gray-50);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    transition: all var(--transition-base);
+}
+
+.stop-item:hover {
+    border-color: var(--color-primary-400);
+    background: var(--color-primary-50);
+}
+
+.stop-item-header {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    margin-bottom: var(--space-3);
+}
+
+.stop-item-number {
+    width: 32px;
+    height: 32px;
+    background: var(--color-primary-500);
+    color: var(--text-inverse);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+}
+
+.stop-item-info {
+    flex: 1;
+    margin: 0 var(--space-4);
+}
+
+.stop-item-city {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.stop-item-dates {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.stop-item-actions {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.stop-item-action {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.stop-item-action:hover {
+    background: var(--color-primary-100);
+    border-color: var(--color-primary-500);
+    color: var(--color-primary-600);
+}
+
+/* Activities */
+.activities-list {
+    margin-top: var(--space-3);
+    padding-left: var(--space-10);
+    display: grid;
+    gap: var(--space-2);
+}
+
+.activity-item {
+    background: var(--color-white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+}
+
+.activity-item-info {
+    flex: 1;
+}
+
+.activity-item-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.activity-item-meta {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.activity-item-cost {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-600);
+}
+
+/* Budget Summary */
+.budget-summary {
+    background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-700) 100%);
+    color: var(--text-inverse);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+}
+
+.budget-total {
+    text-align: center;
+    margin-bottom: var(--space-5);
+}
+
+.budget-total-label {
+    font-size: var(--font-size-sm);
+    opacity: 0.9;
+    margin-bottom: var(--space-2);
+}
+
+.budget-total-value {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+}
+
+.budget-breakdown {
+    display: grid;
+    gap: var(--space-3);
+}
+
+.budget-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+}
+
+.budget-item-label {
+    font-size: var(--font-size-sm);
+}
+
+.budget-item-value {
+    font-weight: var(--font-weight-semibold);
+}
+
+.budget-progress {
+    margin-top: var(--space-4);
+}
+
+.budget-progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-2);
+}
+
+.budget-progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.budget-progress-fill {
+    height: 100%;
+    background: var(--color-white);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-base);
+}
+
+/* Trip Info Card */
+.trip-info-card {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+    box-shadow: var(--shadow-sm);
+}
+
+.trip-info-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.trip-info-item:last-child {
+    border-bottom: none;
+}
+
+.trip-info-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--color-primary-100);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-lg);
+}
+
+.trip-info-content {
+    flex: 1;
+}
+
+.trip-info-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-1);
+}
+
+.trip-info-value {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .trip-planner-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .trip-planner-sidebar {
+        position: static;
+    }
+}
+
+@media (max-width: 576px) {
+    .trip-planner-header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .trip-planner-actions {
+        width: 100%;
+    }
+
+    .trip-planner-actions .btn {
+        flex: 1;
+    }
+
+    .activities-list {
+        padding-left: 0;
+    }
+}

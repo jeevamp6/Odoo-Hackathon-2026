@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="City Search - Discover and add cities to your trip">
+    <title>City Search - Travel Planner</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/city-search.css">
+</head>
+
+<body>
+    <div class="city-search-page">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="container navbar-container">
+                <a href="dashboard.html" class="navbar-brand">
+                    <img src="assets/images/logo.png" alt="Travel Planner" class="navbar-logo">
+                    <span class="navbar-title">Travel Planner</span>
+                </a>
+
+                <div class="navbar-menu">
+                    <a href="dashboard.html" class="navbar-link">
+                        <span>🏠</span>
+                        <span>Home</span>
+                    </a>
+                    <a href="my-trips.html" class="navbar-link">
+                        <span>✈️</span>
+                        <span>My Trips</span>
+                    </a>
+                    <div class="dropdown">
+                        <div class="navbar-user" id="userMenuToggle">
+                            <div class="avatar" id="userAvatar">U</div>
+                            <span class="navbar-user-name" id="userName">User</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="dropdown-menu" id="userMenu">
+                            <a href="#" class="dropdown-item" id="profileLink">
+                                <span>👤</span>
+                                <span>Profile</span>
+                            </a>
+                            <a href="#" class="dropdown-item" id="settingsLink">
+                                <span>⚙️</span>
+                                <span>Settings</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" id="logoutLink">
+                                <span>🚪</span>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="container">
+                <h1 class="page-title">Discover Cities</h1>
+                <p class="page-subtitle">Search and add amazing destinations to your trip</p>
+            </div>
+        </div>
+
+        <!-- Search & Filters -->
+        <div class="container">
+            <div class="search-filters-section">
+                <!-- Search Bar -->
+                <div class="search-bar-large">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="citySearchInput" class="search-input-large"
+                        placeholder="Search cities by name, country, or region...">
+                </div>
+
+                <!-- Filters -->
+                <div class="filters-row">
+                    <select id="regionFilter" class="filter-select">
+                        <option value="">All Regions</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europe">Europe</option>
+                        <option value="North America">North America</option>
+                        <option value="South America">South America</option>
+                        <option value="Africa">Africa</option>
+                        <option value="Oceania">Oceania</option>
+                    </select>
+
+                    <select id="costFilter" class="filter-select">
+                        <option value="">All Budgets</option>
+                        <option value="budget">💰 Budget Friendly</option>
+                        <option value="moderate">💰💰 Moderate</option>
+                        <option value="expensive">💰💰💰 Expensive</option>
+                    </select>
+
+                    <select id="popularityFilter" class="filter-select">
+                        <option value="">All Cities</option>
+                        <option value="popular">⭐ Popular</option>
+                        <option value="trending">🔥 Trending</option>
+                        <option value="hidden">💎 Hidden Gems</option>
+                    </select>
+
+                    <button class="btn btn-ghost" id="clearFiltersBtn">
+                        <span>✕</span>
+                        Clear Filters
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Count -->
+            <div class="results-header">
+                <p class="results-count">
+                    Showing <span id="resultsCount">0</span> cities
+                </p>
+                <select id="sortBy" class="sort-select">
+                    <option value="name">Sort by Name</option>
+                    <option value="popularity">Sort by Popularity</option>
+                    <option value="cost-low">Cost: Low to High</option>
+                    <option value="cost-high">Cost: High to Low</option>
+                </select>
+            </div>
+
+            <!-- Cities Grid -->
+            <div class="cities-grid" id="citiesGrid">
+                <!-- City cards will be inserted here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-state-icon">🔍</div>
+                <h3 class="empty-state-title">No cities found</h3>
+                <p class="empty-state-text">Try adjusting your search or filters</p>
+                <button class="btn btn-primary" id="resetSearchBtn">
+                    Reset Search
+                </button>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading-state" id="loadingState" style="display: none;">
+                <div class="spinner"></div>
+                <p>Loading cities...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add to Trip Modal -->
+    <div class="modal-overlay" id="addToTripModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Add <span id="selectedCityName"></span> to Trip</h3>
+                <button class="modal-close" onclick="closeAddToTripModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: var(--space-4); color: var(--text-secondary);">
+                    Select a trip to add this city to:
+                </p>
+
+                <div id="tripsList" class="trips-select-list">
+                    <!-- Trips will be loaded here -->
+                </div>
+
+                <div class="empty-state" id="noTripsState" style="display: none; padding: var(--space-8) 0;">
+                    <div class="empty-state-icon">✈️</div>
+                    <p class="empty-state-text">You don't have any trips yet</p>
+                    <button class="btn btn-primary" onclick="window.location.href='create-trip.html'">
+                        Create New Trip
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeAddToTripModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/city-search.js"></script>
+</body>
+
+</html>

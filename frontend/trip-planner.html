@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trip Planner - Build your itinerary with stops, activities, and budget tracking">
+    <title>Trip Planner - Travel Planner</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/trip-planner.css">
+    <link rel="stylesheet" href="css/itinerary.css">
+</head>
+
+<body>
+    <div class="trip-planner">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="container navbar-container">
+                <a href="dashboard.html" class="navbar-brand">
+                    <img src="assets/images/logo.png" alt="Travel Planner" class="navbar-logo">
+                    <span class="navbar-title">Travel Planner</span>
+                </a>
+
+                <div class="navbar-menu">
+                    <a href="dashboard.html" class="navbar-link">
+                        <span>←</span>
+                        <span>Back to Dashboard</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Trip Header -->
+        <div class="trip-planner-header">
+            <div class="container trip-planner-header-content">
+                <div class="trip-planner-title-section">
+                    <h1 class="trip-planner-title" id="tripTitle">Loading...</h1>
+                    <div class="trip-planner-meta">
+                        <span id="tripDates">📅 Loading...</span>
+                        <span>•</span>
+                        <span id="tripDuration">0 days</span>
+                    </div>
+                </div>
+                <div class="trip-planner-actions">
+                    <button class="btn btn-ghost" id="shareBtn">
+                        <span>🔗</span>
+                        Share
+                    </button>
+                    <button class="btn btn-secondary" id="exportBtn">
+                        <span>📥</span>
+                        Export
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Mode Toggle -->
+        <div class="container">
+            <div class="view-mode-toggle">
+                <button class="view-mode-btn active" data-view="builder">
+                    <span>🛠️</span>
+                    <span>Builder</span>
+                </button>
+                <button class="view-mode-btn" data-view="itinerary">
+                    <span>📋</span>
+                    <span>Itinerary</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container trip-planner-layout">
+            <!-- Builder View -->
+            <div class="view-container" id="builderView">
+                <div class="trip-planner-main">
+                    <!-- Stops Section -->
+                    <div class="planner-section">
+                        <div class="planner-section-header">
+                            <h2 class="planner-section-title">
+                                <span>📍</span>
+                                Stops & Destinations
+                            </h2>
+                            <button class="btn btn-primary btn-sm" id="addStopBtn">
+                                <span>+</span>
+                                Add Stop
+                            </button>
+                        </div>
+
+                        <div class="stops-list" id="stopsList">
+                            <!-- Stops will be inserted here -->
+                        </div>
+
+                        <div class="empty-state" id="stopsEmptyState" style="display: none;">
+                            <div class="empty-state-icon">📍</div>
+                            <h3 class="empty-state-title">No stops added yet</h3>
+                            <p class="empty-state-text">Add your first destination to start planning your itinerary</p>
+                            <button class="btn btn-primary" onclick="document.getElementById('addStopBtn').click()">
+                                Add First Stop
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="trip-planner-sidebar">
+                    <!-- Budget Summary -->
+                    <div class="budget-summary">
+                        <div class="budget-total">
+                            <div class="budget-total-label">Total Budget</div>
+                            <div class="budget-total-value" id="totalBudget">$0</div>
+                        </div>
+
+                        <div class="budget-breakdown">
+                            <div class="budget-item">
+                                <span class="budget-item-label">Spent</span>
+                                <span class="budget-item-value" id="budgetSpent">$0</span>
+                            </div>
+                            <div class="budget-item">
+                                <span class="budget-item-label">Remaining</span>
+                                <span class="budget-item-value" id="budgetRemaining">$0</span>
+                            </div>
+                        </div>
+
+                        <div class="budget-progress">
+                            <div class="budget-progress-label">
+                                <span>Budget Used</span>
+                                <span id="budgetPercentage">0%</span>
+                            </div>
+                            <div class="budget-progress-bar">
+                                <div class="budget-progress-fill" id="budgetProgressFill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trip Info -->
+                    <div class="trip-info-card">
+                        <div class="trip-info-item">
+                            <div class="trip-info-icon">📍</div>
+                            <div class="trip-info-content">
+                                <div class="trip-info-label">Total Stops</div>
+                                <div class="trip-info-value" id="totalStops">0</div>
+                            </div>
+                        </div>
+
+                        <div class="trip-info-item">
+                            <div class="trip-info-icon">🎯</div>
+                            <div class="trip-info-content">
+                                <div class="trip-info-label">Activities</div>
+                                <div class="trip-info-value" id="totalActivities">0</div>
+                            </div>
+                        </div>
+
+                        <div class="trip-info-item">
+                            <div class="trip-info-icon">📅</div>
+                            <div class="trip-info-content">
+                                <div class="trip-info-label">Duration</div>
+                                <div class="trip-info-value" id="tripDurationSidebar">0 days</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Itinerary View -->
+            <div class="view-container" id="itineraryView" style="display: none;">
+                <div class="itinerary-header">
+                    <h2 class="itinerary-title">Your Itinerary</h2>
+                    <div class="itinerary-view-toggle">
+                        <button class="itinerary-view-btn active" data-layout="timeline">
+                            <span>📅</span>
+                            <span>Timeline</span>
+                        </button>
+                        <button class="itinerary-view-btn" data-layout="list">
+                            <span>📋</span>
+                            <span>List</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Timeline View -->
+                <div class="itinerary-timeline" id="timelineView">
+                    <!-- Timeline will be generated here -->
+                </div>
+
+                <!-- List View -->
+                <div class="itinerary-list" id="listView" style="display: none;">
+                    <!-- List view will be generated here -->
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="itineraryEmptyState" style="display: none;">
+                    <div class="empty-state-icon">📋</div>
+                    <h3 class="empty-state-title">No itinerary yet</h3>
+                    <p class="empty-state-text">Add stops and activities in the Builder view to see your itinerary</p>
+                    <button class="btn btn-primary" onclick="document.querySelector('[data-view=builder]').click()">
+                        Go to Builder
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Stop Modal -->
+    <div class="modal-overlay" id="addStopModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Stop</h3>
+                <button class="modal-close" onclick="closeAddStopModal()">×</button>
+            </div>
+            <form id="addStopForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="stopCity" class="form-label">City *</label>
+                        <input type="text" id="stopCity" class="form-input" placeholder="e.g., Paris" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stopCountry" class="form-label">Country *</label>
+                        <input type="text" id="stopCountry" class="form-input" placeholder="e.g., France" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stopArrival" class="form-label">Arrival Date *</label>
+                        <input type="date" id="stopArrival" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stopDeparture" class="form-label">Departure Date *</label>
+                        <input type="date" id="stopDeparture" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stopNotes" class="form-label">Notes (Optional)</label>
+                        <textarea id="stopNotes" class="form-textarea" placeholder="Add any notes about this stop..."
+                            rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost" onclick="closeAddStopModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Stop</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Activity Modal -->
+    <div class="modal-overlay" id="addActivityModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Activity</h3>
+                <button class="modal-close" onclick="closeAddActivityModal()">×</button>
+            </div>
+            <form id="addActivityForm">
+                <div class="modal-body">
+                    <input type="hidden" id="activityStopId">
+
+                    <div class="form-group">
+                        <label for="activityTitle" class="form-label">Activity Title *</label>
+                        <input type="text" id="activityTitle" class="form-input" placeholder="e.g., Visit Eiffel Tower"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="activityCategory" class="form-label">Category *</label>
+                        <select id="activityCategory" class="form-select" required>
+                            <option value="">Select category</option>
+                            <option value="sightseeing">🏛️ Sightseeing</option>
+                            <option value="food">🍽️ Food & Dining</option>
+                            <option value="adventure">🏔️ Adventure</option>
+                            <option value="shopping">🛍️ Shopping</option>
+                            <option value="entertainment">🎭 Entertainment</option>
+                            <option value="relaxation">🧘 Relaxation</option>
+                            <option value="transport">🚗 Transport</option>
+                            <option value="other">📌 Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="activityDate" class="form-label">Date *</label>
+                        <input type="date" id="activityDate" class="form-input" required>
+                    </div>
+
+                    <div class="form-row form-row-2">
+                        <div class="form-group">
+                            <label for="activityStartTime" class="form-label">Start Time</label>
+                            <input type="time" id="activityStartTime" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="activityDuration" class="form-label">Duration (hours)</label>
+                            <input type="number" id="activityDuration" class="form-input" placeholder="2" min="0.5"
+                                step="0.5">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="activityCost" class="form-label">Estimated Cost (USD)</label>
+                        <input type="number" id="activityCost" class="form-input" placeholder="50" min="0" step="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="activityLocation" class="form-label">Location (Optional)</label>
+                        <input type="text" id="activityLocation" class="form-input" placeholder="Address or landmark">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="activityDescription" class="form-label">Description (Optional)</label>
+                        <textarea id="activityDescription" class="form-textarea"
+                            placeholder="Add details about this activity..." rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost" onclick="closeAddActivityModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Activity</button>
+                    <span class="budget-item-value" id="budgetRemaining">$0</span>
+                </div>
+        </div>
+
+        <div class="budget-progress">
+            <div class="budget-progress-label">
+                <span>Budget Used</span>
+                <span id="budgetPercentage">0%</span>
+            </div>
+            <div class="budget-progress-bar">
+                <div class="budget-progress-fill" id="budgetProgressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trip Info -->
+    <div class="trip-info-card">
+        <div class="trip-info-item">
+            <div class="trip-info-icon">📍</div>
+            <div class="trip-info-content">
+                <div class="trip-info-label">Total Stops</div>
+                <div class="trip-info-value" id="totalStops">0</div>
+            </div>
+        </div>
+
+        <div class="trip-info-item">
+            <div class="trip-info-icon">🎯</div>
+            <div class="trip-info-content">
+                <div class="trip-info-label">Activities</div>
+                <div class="trip-info-value" id="totalActivities">0</div>
+            </div>
+        </div>
+
+        <div class="trip-info-item">
+            <div class="trip-info-icon">📅</div>
+            <div class="trip-info-content">
+                <div class="trip-info-label">Duration</div>
+                <div class="trip-info-value" id="tripDurationSidebar">0 days</div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Itinerary View -->
+    <div class="view-container" id="itineraryView" style="display: none;">
+        <div class="itinerary-header">
+            <h2 class="itinerary-title">Your Itinerary</h2>
+            <div class="itinerary-view-toggle">
+                <button class="itinerary-view-btn active" data-layout="timeline">
+                    <span>📅</span>
+                    <span>Timeline</span>
+                </button>
+                <button class="itinerary-view-btn" data-layout="list">
+                    <span>📋</span>
+                    <span>List</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Timeline View -->
+        <div class="itinerary-timeline" id="timelineView">
+            <!-- Timeline will be generated here -->
+        </div>
+
+        <!-- List View -->
+        <div class="itinerary-list" id="listView" style="display: none;">
+            <!-- List view will be generated here -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="itineraryEmptyState" style="display: none;">
+            <div class="empty-state-icon">📋</div>
+            <h3 class="empty-state-title">No itinerary yet</h3>
+            <p class="empty-state-text">Add stops and activities in the Builder view to see your itinerary</p>
+            <button class="btn btn-primary" onclick="document.querySelector('[data-view=builder]').click()">
+                Go to Builder
+            </button>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Add Stop Modal -->
+    <div class="modal-overlay" id="addStopModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Stop</h3>
+                <button class="modal-close" onclick="closeAddStopModal()">×</button>
+            </div>
+            <form id="addStopForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="stopCity" class="form-label">City *</label>
+                        <input type="text" id="stopCity" class="form-input" placeholder="e.g., Paris" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stopCountry" class="form-label">Country *</label>
+                        <input type="text" id="stopCountry" class="form-input" placeholder="e.g., France" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stopArrival" class="form-label">Arrival Date *</label>
+                        <input type="date" id="stopArrival" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stopDeparture" class="form-label">Departure Date *</label>
+                        <input type="date" id="stopDeparture" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stopNotes" class="form-label">Notes (Optional)</label>
+                        <textarea id="stopNotes" class="form-textarea" placeholder="Add any notes about this stop..."
+                            rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost" onclick="closeAddStopModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Stop</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Activity Modal -->
+    <div class="modal-overlay" id="addActivityModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Activity</h3>
+                <button class="modal-close" onclick="closeAddActivityModal()">×</button>
+            </div>
+            <form id="addActivityForm">
+                <div class="modal-body">
+                    <input type="hidden" id="activityStopId">
+
+                    <div class="form-group">
+                        <label for="activityTitle" class="form-label">Activity Title *</label>
+                        <input type="text" id="activityTitle" class="form-input" placeholder="e.g., Visit Eiffel Tower"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="activityCategory" class="form-label">Category *</label>
+                        <select id="activityCategory" class="form-select" required>
+                            <option value="">Select category</option>
+                            <option value="sightseeing">🏛️ Sightseeing</option>
+                            <option value="food">🍽️ Food & Dining</option>
+                            <option value="adventure">🏔️ Adventure</option>
+                            <option value="shopping">🛍️ Shopping</option>
+                            <option value="entertainment">🎭 Entertainment</option>
+                            <option value="relaxation">🧘 Relaxation</option>
+                            <option value="transport">🚗 Transport</option>
+                            <option value="other">📌 Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="activityDate" class="form-label">Date *</label>
+                        <input type="date" id="activityDate" class="form-input" required>
+                    </div>
+
+                    <div class="form-row form-row-2">
+                        <div class="form-group">
+                            <label for="activityStartTime" class="form-label">Start Time</label>
+                            <input type="time" id="activityStartTime" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="activityDuration" class="form-label">Duration (hours)</label>
+                            <input type="number" id="activityDuration" class="form-input" placeholder="2" min="0.5"
+                                step="0.5">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="activityCost" class="form-label">Estimated Cost (USD)</label>
+                        <input type="number" id="activityCost" class="form-input" placeholder="50" min="0" step="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="activityLocation" class="form-label">Location (Optional)</label>
+                        <input type="text" id="activityLocation" class="form-input" placeholder="Address or landmark">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="activityDescription" class="form-label">Description (Optional)</label>
+                        <textarea id="activityDescription" class="form-textarea"
+                            placeholder="Add details about this activity..." rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost" onclick="closeAddActivityModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Activity</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/trip-planner.js"></script>
+</body>
+
+</html>

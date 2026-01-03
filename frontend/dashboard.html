@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Travel Planner Dashboard - Manage your trips, budgets, and itineraries">
+    <title>Dashboard - Travel Planner</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="container navbar-container">
+                <a href="dashboard.html" class="navbar-brand">
+                    <img src="assets/images/logo.png" alt="Travel Planner" class="navbar-logo">
+                    <span class="navbar-title">Travel Planner</span>
+                </a>
+
+                <div class="navbar-menu">
+                    <a href="dashboard.html" class="navbar-link">
+                        <span>🏠</span>
+                        <span>Home</span>
+                    </a>
+                    <a href="my-trips.html" class="navbar-link">
+                        <span>✈️</span>
+                        <span>My Trips</span>
+                    </a>
+                    <a href="trip-calendar.html" class="navbar-link">
+                        <span>📅</span>
+                        <span>Calendar</span>
+                    </a>
+                    <a href="city-search.html" class="navbar-link">
+                        <span>🌍</span>
+                        <span>Cities</span>
+                    </a>
+                    <div class="dropdown">
+                        <div class="navbar-user" id="userMenuToggle">
+                            <div class="avatar" id="userAvatar">U</div>
+                            <span class="navbar-user-name" id="userName">User</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="dropdown-menu" id="userMenu">
+                            <a href="#" class="dropdown-item" id="profileLink">
+                                <span>👤</span>
+                                <span>Profile</span>
+                            </a>
+                            <a href="#" class="dropdown-item" id="settingsLink">
+                                <span>⚙️</span>
+                                <span>Settings</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" id="logoutLink">
+                                <span>🚪</span>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Dashboard Header -->
+        <header class="dashboard-header">
+            <div class="container dashboard-header-content">
+                <h1 class="dashboard-welcome" id="welcomeMessage">Welcome back, Traveler!</h1>
+                <p class="dashboard-subtitle">Ready to plan your next adventure?</p>
+                <div class="dashboard-actions">
+                    <button class="btn btn-new-trip" id="newTripBtn">
+                        <span>✈️</span>
+                        Plan New Trip
+                    </button>
+                    <button class="btn btn-secondary btn-lg" id="exploreBtn">
+                        <span>🌍</span>
+                        Explore Destinations
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container">
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon">✈️</div>
+                    </div>
+                    <div class="stat-card-value" id="totalTrips">0</div>
+                    <div class="stat-card-label">Total Trips</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon">🌍</div>
+                    </div>
+                    <div class="stat-card-value" id="totalCountries">0</div>
+                    <div class="stat-card-label">Countries Visited</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon">🏙️</div>
+                    </div>
+                    <div class="stat-card-value" id="totalCities">0</div>
+                    <div class="stat-card-label">Cities Explored</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon">💰</div>
+                    </div>
+                    <div class="stat-card-value" id="totalSpent">$0</div>
+                    <div class="stat-card-label">Total Spent</div>
+                </div>
+            </div>
+
+            <!-- Upcoming Trips Section -->
+            <section>
+                <div class="section-header">
+                    <h2 class="section-title">Upcoming Trips</h2>
+                    <a href="my-trips.html" class="section-link" id="viewAllTrips">
+                        View All
+                        <span>→</span>
+                    </a>
+                </div>
+
+                <div class="trips-grid" id="upcomingTripsGrid">
+                    <!-- Trip cards will be inserted here -->
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <div class="empty-state-icon">✈️</div>
+                    <h3 class="empty-state-title">No trips planned yet</h3>
+                    <p class="empty-state-text">
+                        Start planning your dream vacation! Create your first trip and add destinations, activities, and
+                        budgets.
+                    </p>
+                    <button class="btn btn-primary btn-lg" onclick="window.location.href='create-trip.html'">
+                        <span>✈️</span>
+                        Plan Your First Trip
+                    </button>
+                </div>
+            </section>
+
+            <!-- Recommended Destinations Section -->
+            <section>
+                <div class="section-header">
+                    <h2 class="section-title">Recommended Destinations</h2>
+                    <a href="city-search.html" class="section-link">
+                        Explore More
+                        <span>→</span>
+                    </a>
+                </div>
+
+                <div class="destinations-grid">
+                    <div class="destination-card" data-destination="Paris">
+                        <img src="assets/images/paris.jpg" alt="Paris" class="destination-card-image">
+                        <div class="destination-card-overlay">
+                            <h3 class="destination-card-title">Paris, France</h3>
+                            <p class="destination-card-subtitle">The City of Light</p>
+                        </div>
+                    </div>
+
+                    <div class="destination-card" data-destination="Tokyo">
+                        <img src="assets/images/tokyo.jpg" alt="Tokyo" class="destination-card-image">
+                        <div class="destination-card-overlay">
+                            <h3 class="destination-card-title">Tokyo, Japan</h3>
+                            <p class="destination-card-subtitle">Modern Meets Traditional</p>
+                        </div>
+                    </div>
+
+                    <div class="destination-card" data-destination="Bali">
+                        <img src="assets/images/bali.jpg" alt="Bali" class="destination-card-image">
+                        <div class="destination-card-overlay">
+                            <h3 class="destination-card-title">Bali, Indonesia</h3>
+                            <p class="destination-card-subtitle">Tropical Paradise</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/dashboard.js"></script>
+</body>
+
+</html>
