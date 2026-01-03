@@ -79,3 +79,4 @@ This frontend works seamlessly with a **FastAPI + MySQL backend** and follows a 
 | `trip-calendar.html` | Visual calendar & timeline |
 | `accommodations.html` | Book stays along the route |
 
+youtube link:https://youtu.be/-g4L95lF7Wc?si=ThPQy-RsPdzgZU9Y
